@@ -1,1 +1,134 @@
 # ThenewNetflix
+
+# Netflix Clone With JWT Authentication
+
+This project is a full Netflix-inspired streaming website built with plain HTML,
+CSS, JavaScript, and a small Node.js backend. It is not only a static landing
+page. It includes a working login system, JWT-protected session checking, an
+interactive catalog, movie detail popups, a watchlist, likes, and a fake player
+experience so the website feels like a real streaming app.
+
+## What The Website Does
+
+When the website opens, the user first sees a cinematic sign-in screen. A demo
+account is already filled in, so anyone can quickly log in and explore the app.
+Users can also create a new account from the Register tab.
+
+After login, the app opens into a Netflix-style home screen with:
+
+- A large featured hero section
+- Trending movie cards
+- Netflix Originals row
+- Continue Watching row
+- My List section
+- Search
+- Notifications dropdown
+- Profile dropdown
+- Sign out button
+
+The interface is responsive, so it works on desktop and smaller screens.
+
+## Interactive Features
+
+The site has several app-like interactions:
+
+- Click a movie poster to open a detailed movie popup.
+- Click Play to open a cinematic fake player overlay.
+- Use the hero arrow buttons to switch the featured title.
+- Add and remove movies from My List.
+- Like movies.
+- Scroll the horizontal rows using arrow buttons.
+- Search titles by name, genre, cast, year, or description.
+- Open the notification panel from the bell icon.
+- Open the profile panel from the profile chip.
+- Press Escape to close open overlays.
+
+The watchlist and likes are saved in `localStorage`, so they stay there after a
+page refresh in the same browser.
+
+## Authentication System
+
+The backend is written in Node.js using only built-in modules. No Express or
+extra npm packages are required.
+
+The authentication flow works like this:
+
+1. A user registers or signs in.
+2. The server checks the email and password.
+3. If the credentials are valid, the server creates a JWT.
+4. The frontend stores the JWT in `localStorage`.
+5. On reload, the frontend calls `/api/auth/me` with the token.
+6. The backend verifies the token signature and expiry.
+7. If the token is valid, the user stays signed in.
+
+Passwords are not stored as plain text. They are hashed with PBKDF2 and a random
+salt before being saved in `data/users.json`.
+
+## Demo Login
+
+Use this account to test the site immediately:
+
+```text
+Email: demo@netflix.local
+Password: Stream@1234
+```
+
+## How To Run
+
+Open a terminal inside the project folder and run:
+
+```bash
+npm start
+```
+
+Then open:
+
+```text
+http://localhost:3000
+```
+
+On Windows, you can also double-click:
+
+```text
+start.bat
+```
+
+## Main Files
+
+```text
+index.html    Main page structure
+style.css     Complete Netflix-style responsive UI
+app.js        Frontend interactions, search, modals, watchlist, and auth flow
+server.js     Node.js server, JWT auth API, password hashing, static file server
+package.json  Project metadata and start script
+start.bat     Simple Windows launcher
+```
+
+## API Routes
+
+```text
+GET  /api/health          Checks if the backend is running
+POST /api/auth/register   Creates a new user and returns a JWT
+POST /api/auth/login      Logs in an existing user and returns a JWT
+GET  /api/auth/me         Verifies the JWT and returns the current user
+POST /api/auth/logout     Ends the client-side session
+```
+
+## Notes For Production
+
+This is a strong learning/demo project, but a production streaming site would
+need extra security and infrastructure:
+
+- Set a strong `JWT_SECRET` environment variable.
+- Use HTTPS.
+- Prefer secure httpOnly cookies instead of storing JWTs in `localStorage`.
+- Use a real database instead of `data/users.json`.
+- Add email verification, password reset, rate limiting, and account lockout.
+- Replace the demo movie data with real licensed content and media assets.
+
+## Project Summary
+
+In simple terms, this is a polished Netflix clone that demonstrates both frontend
+UI design and backend authentication. The frontend gives users a smooth streaming
+experience, while the backend proves that login, registration, password hashing,
+JWT creation, and token verification are all working behind the scenes.
