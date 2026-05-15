@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Clone | JWT Streaming App</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+
+    <main id="auth-screen" class="auth-screen" aria-live="polite">
+      <section class="auth-hero" aria-label="Sign in">
+        <div class="brand auth-brand">NETFLIX</div>
+        <div class="auth-copy">
+          <p class="kicker">Unlimited cinema, series, and weekend escapes</p>
+          <h1>Watch something that pulls the room quiet.</h1>
+          <p>
+            Sign in to your private streaming dashboard with a real JWT session.
+          </p>
+        </div>
+      </section>
+
+      <section class="auth-panel" aria-label="Authentication form">
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button
+            class="tab-button active"
+            id="login-tab"
+            type="button"
+            role="tab"
+            aria-selected="true"
+          >
+            Sign In
+          </button>
+          <button
+            class="tab-button"
+            id="register-tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+          >
+            Register
+          </button>
+        </div>
+
+        <form id="auth-form" class="auth-form">
+          <div class="field hidden" id="name-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              value="demo@netflix.local"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              value="Stream@1234"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <label class="checkbox">
+              <input id="remember" type="checkbox" checked />
+              <span>Remember me</span>
+            </label>
+            <button class="text-button" id="demo-fill" type="button">
+              Demo account
+            </button>
+          </div>
+
+          <button class="primary-button wide" id="auth-submit" type="submit">
+            <span>Sign In</span>
+          </button>
+          <p class="form-error" id="auth-error" role="alert"></p>
+        </form>
+      </section>
+    </main>
+
+    <main id="app-screen" class="app-screen hidden">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="Netflix clone home">
+          NETFLIX
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#home" class="active">Home</a>
+          <a href="#series">Series</a>
+          <a href="#films">Films</a>
+          <a href="#latest">New</a>
+          <a href="#watchlist">My List</a>
+        </nav>
+        <div class="top-actions">
+          <label class="search-box" aria-label="Search titles">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+            </svg>
+            <input id="search-input" type="search" placeholder="Search" />
+          </label>
+          <button class="icon-button" id="notify-button" type="button" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+          </button>
+          <button class="profile-chip" id="profile-button" type="button">
+            <span id="avatar" class="avatar">D</span>
+            <span id="profile-name">Demo</span>
+          </button>
+          <button class="ghost-button" id="logout-button" type="button">
+            Sign Out
+          </button>
+        </div>
+        <div class="profile-menu hidden" id="profile-menu">
+          <p id="profile-email">demo@netflix.local</p>
+          <span id="profile-plan">Premium plan</span>
+        </div>
+        <div class="notification-panel hidden" id="notification-panel">
+          <h3>Notifications</h3>
+          <p>New episode added to Blackout Bay.</p>
+          <p>Night City Zero is trending in India today.</p>
+          <p>Your Premium session is protected by JWT.</p>
+        </div>
+      </header>
+
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <div class="hero-badge" id="hero-badge">
+            <span class="live-dot"></span>
+            No. 1 in your watchlist
+          </div>
+          <h1 id="hero-title">Midnight Protocol</h1>
+          <p id="hero-description">
+            A rogue analyst and a disgraced pilot discover a citywide blackout
+            is only the opening move.
+          </p>
+          <div class="meta-row" aria-label="Title details">
+            <span id="hero-match">98% Match</span>
+            <span id="hero-year">2026</span>
+            <span id="hero-quality">4K Ultra HD</span>
+            <span id="hero-duration">2h 14m</span>
+          </div>
+          <div class="hero-actions">
+            <button class="play-button" id="hero-play" type="button" data-action="play">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7Z" />
+              </svg>
+              <span>Play</span>
+            </button>
+            <button class="secondary-button" id="hero-list" type="button" data-action="list">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <span>My List</span>
+            </button>
+            <button class="secondary-button" id="hero-info" type="button" data-action="details">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+                <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <span>More Info</span>
+            </button>
+          </div>
+        </div>
+        <div class="hero-switcher" aria-label="Featured title controls">
+          <button class="icon-button" type="button" id="hero-prev" aria-label="Previous featured title">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <button class="icon-button" type="button" id="hero-next" aria-label="Next featured title">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="content-shell">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Because you watched thrillers</p>
+            <h2>Trending Now</h2>
+          </div>
+          <button class="text-button" type="button" id="clear-search">
+            Clear search
+          </button>
+        </div>
+        <div id="movie-grid" class="movie-grid" aria-live="polite"></div>
+
+        <div class="rail-block" id="series">
+          <div class="section-heading compact rail-header">
+            <h2>Netflix Originals</h2>
+            <div class="rail-controls">
+              <button class="icon-button" type="button" data-scroll-rail="originals-rail" data-direction="-1" aria-label="Scroll originals left">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button class="icon-button" type="button" data-scroll-rail="originals-rail" data-direction="1" aria-label="Scroll originals right">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="originals-rail" class="poster-rail"></div>
+        </div>
+
+        <div class="rail-block" id="films">
+          <div class="section-heading compact rail-header">
+            <h2>Continue Watching</h2>
+            <div class="rail-controls">
+              <button class="icon-button" type="button" data-scroll-rail="continue-rail" data-direction="-1" aria-label="Scroll continue watching left">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+              <button class="icon-button" type="button" data-scroll-rail="continue-rail" data-direction="1" aria-label="Scroll continue watching right">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="continue-rail" class="poster-rail"></div>
+        </div>
+
+        <div class="rail-block" id="watchlist">
+          <div class="section-heading compact">
+            <h2>My List</h2>
+          </div>
+          <div id="watchlist-grid" class="movie-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <section class="modal hidden" id="title-modal" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+      <div class="modal-panel">
+        <button class="modal-close icon-button" id="modal-close" type="button" aria-label="Close details">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="modal-art" id="modal-art"></div>
+        <div class="modal-body">
+          <p class="kicker" id="modal-kicker">Netflix Original</p>
+          <h2 id="modal-title">Title</h2>
+          <p id="modal-description"></p>
+          <div class="meta-row modal-meta" id="modal-meta"></div>
+          <p class="modal-cast" id="modal-cast"></p>
+          <div class="hero-actions">
+            <button class="play-button" id="modal-play" type="button" data-action="play">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7Z" />
+              </svg>
+              <span>Play</span>
+            </button>
+            <button class="secondary-button" id="modal-list" type="button" data-action="list">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <span>My List</span>
+            </button>
+            <button class="secondary-button" id="modal-like" type="button" data-action="like">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10v11" />
+                <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h1a2 2 0 0 1 2 2v1.88Z" />
+              </svg>
+              <span>Like</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="player hidden" id="player-modal" aria-modal="true" role="dialog" aria-label="Player">
+      <div class="player-screen" id="player-screen">
+        <button class="modal-close icon-button" id="player-close" type="button" aria-label="Close player">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="player-center">
+          <div class="player-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7Z" />
+            </svg>
+          </div>
+          <p>Now playing</p>
+          <h2 id="player-title">Title</h2>
+        </div>
+        <div class="player-bar">
+          <span id="player-time">00:00</span>
+          <div class="progress player-progress">
+            <span id="player-progress"></span>
+          </div>
+          <span>02:14</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast hidden" id="toast" role="status"></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

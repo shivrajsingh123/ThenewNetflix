@@ -1,0 +1,20 @@
+{
+  "name": "netflix-clone-jwt",
+  "version": "1.0.0",
+  "description": "A polished Netflix-style streaming UI with a dependency-free JWT authentication API.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "netflix",
+    "clone",
+    "jwt",
+    "streaming"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

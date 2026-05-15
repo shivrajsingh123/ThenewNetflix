@@ -1,5 +1,3 @@
-# ThenewNetflix
-
 # Netflix Clone With JWT Authentication
 
 This project is a full Netflix-inspired streaming website built with plain HTML,
